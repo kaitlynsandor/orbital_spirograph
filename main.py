@@ -175,7 +175,7 @@ if __name__ == "__main__":
         elif all(x != '' for x in values.values()):
             offset = 0
             for i in range(planets):
-                planets_to_data[values[offset]] = [float(values[offset+1]), (values[offset+2])]
+                planets_to_data[values[offset]] = [float(values[offset+1]), (values[offset+2])] # dict --> planet:{semi, color}
                 offset += 3
             break
         else:
@@ -188,15 +188,10 @@ if __name__ == "__main__":
     ax.axis('off')
     ss = SolarSystem(Object("Sun", 12, 'yellow', 'yellow', 15, [0, 0, 0]), solar_mass) # <-- mass of sun hard coded
     ss.time = Time(sim_start_date).jd
-    # colors = ['purple', 'cyan', 'lime', 'magenta', 'magenta']
-    # spiro_colors = ['purple','cyan','lime','magenta']
 
-    texty = [.47, .73, 1, 1.5, 2]
-    i = 0
     for planet in planets_to_data.keys():
         ss.add_planet(Object(planet, 10, planets_to_data[planet][1], planets_to_data[planet][1], 4,
                          [planets_to_data[planet][0], 0]))
-        i+=1
 
     ss.calculate_initial_velocity()
     ss.calculate_period()
